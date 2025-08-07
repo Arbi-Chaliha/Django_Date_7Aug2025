@@ -1,0 +1,378 @@
+@prefix ns1: <http://www.slb.com/ontologies/Troubleshooting_ORA_FNFM_Ontology_#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#flow_rate_is_null> a ns1:Failure ;
+    rdfs:label "flow rate is null" ;
+    ns1:cause <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#can't_set_the_packer> ;
+    ns1:hasRootCause <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#calibration_issue>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#gmr_sensor_issue>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#leak_somewhere>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#master_controller_issue>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#master_controller_issue_2>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#master_to_motor_controller_issue_1>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#motor_control_issue>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#power_supply_issue>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#solenoid_controller_issue> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#CAN_communication_degraded_alert> a ns1:DataChannel ;
+    rdfs:label "CAN communication degraded alert" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#EIP_Uplink_Alert> a ns1:DataChannel ;
+    rdfs:label "EIP Uplink Alert" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_CAN_device_check> a ns1:Trigger ;
+    rdfs:label "FNFM CAN device check" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#CAN_communication_degraded_alert> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_GMR_Voltage> a ns1:Trigger ;
+    rdfs:label "FNFM GMR Voltage" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#MCGMRVOLTFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LIN_device_check> a ns1:Trigger ;
+    rdfs:label "FNFM LIN device check" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#LIN_device_communication_issue_alert> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_Actuator_Voltage> a ns1:Trigger ;
+    rdfs:label "FNFM LVPS Actuator Voltage" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSACTVLTFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_Actuator_Voltage_Current> a ns1:Trigger ;
+    rdfs:label "FNFM LVPS Actuator Voltage Current" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSACTVCUFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_Digital_Voltage> a ns1:Trigger ;
+    rdfs:label "FNFM LVPS Digital Voltage" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSDIGVLTFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_Digital_Voltage_Current> a ns1:Trigger ;
+    rdfs:label "FNFM LVPS Digital Voltage Current" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSDIGVCUFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_High_Voltage_MCM_Temperature> a ns1:Trigger ;
+    rdfs:label "FNFM LVPS High Voltage MCM Temperature" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSHVTEMPFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_Input_Voltage> a ns1:Trigger ;
+    rdfs:label "FNFM LVPS Input Voltage" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSINVLTFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_Negative_Analog_Voltage> a ns1:Trigger ;
+    rdfs:label "FNFM LVPS Negative Analog Voltage" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSNANVLTFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_Negative_Analog_Voltage_Current> a ns1:Trigger ;
+    rdfs:label "FNFM LVPS Negative Analog Voltage Current" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSNANVCUFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_Positive_Analog_Voltage> a ns1:Trigger ;
+    rdfs:label "FNFM LVPS Positive Analog Voltage" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSANAVLTFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_Positive_Analog_Voltage_Current> a ns1:Trigger ;
+    rdfs:label "FNFM LVPS Positive Analog Voltage Current" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSANVCURFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_Power_Supply_Digital_Ground> a ns1:Trigger ;
+    rdfs:label "FNFM LVPS Power Supply Digital Ground" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSDIGGNDFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_Power_Supply_MCM_Temperature> a ns1:Trigger ;
+    rdfs:label "FNFM LVPS Power Supply MCM Temperature" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSTEMPFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_Rectifier_Transistor_Temperature> a ns1:Trigger ;
+    rdfs:label "FNFM LVPS Rectifier Transistor Temperature" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSRCTEMPFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_Transformer_Temperature> a ns1:Trigger ;
+    rdfs:label "FNFM LVPS Transformer Temperature" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSTRNTEMPFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Large_pump_calibration_check> a ns1:Trigger ;
+    rdfs:label "FNFM Large pump calibration check" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#LP_CALIBRATION_ALERT> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Master_Controller_Analog_Ground> a ns1:Trigger ;
+    rdfs:label "FNFM Master Controller Analog Ground" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#MCANGNDFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Master_Controller_Core_Voltage> a ns1:Trigger ;
+    rdfs:label "FNFM Master Controller Core Voltage" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#MCCORVLTFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Master_Controller_Digital_Voltage> a ns1:Trigger ;
+    rdfs:label "FNFM Master Controller Digital Voltage" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#MCDIGVLTFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Master_Controller_EIP_Core_Voltage> a ns1:Trigger ;
+    rdfs:label "FNFM Master Controller EIP Core Voltage" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#MCEICORVFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Master_Controller_EIP_Digital_Voltage> a ns1:Trigger ;
+    rdfs:label "FNFM Master Controller EIP Digital Voltage" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#MCEIDIGVFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Master_Controller_Input_Voltage> a ns1:Trigger ;
+    rdfs:label "FNFM Master Controller Input Voltage" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#MCINVLTFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Master_Controller_Reference_Voltage> a ns1:Trigger ;
+    rdfs:label "FNFM Master Controller Reference Voltage" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#MCREFVLTFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Motor_Error_Status> a ns1:Trigger ;
+    rdfs:label "FNFM Motor Error Status" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#MTERRSTAFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Motor_Status> a ns1:Trigger ;
+    rdfs:label "FNFM Motor Status" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#MTMTRSTAFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Output_Pressure> a ns1:Trigger ;
+    rdfs:label "FNFM Output Pressure" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#MCPRESFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Small_pump_calibration_check> a ns1:Trigger ;
+    rdfs:label "FNFM Small pump calibration check" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#SP_CALIBRATION_ALERT> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Solenoid_PHM_Actuator_Voltage> a ns1:Trigger ;
+    rdfs:label "FNFM Solenoid PHM Actuator Voltage" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#SCACTVLTFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Solenoid_PHM_Analog_Ground_Voltage> a ns1:Trigger ;
+    rdfs:label "FNFM Solenoid PHM Analog Ground Voltage" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#SCANGNDFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Solenoid_PHM_Charge_Pump_Voltage> a ns1:Trigger ;
+    rdfs:label "FNFM Solenoid PHM Charge Pump Voltage" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#SCCHVLTFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Solenoid_PHM_Digital_Voltage> a ns1:Trigger ;
+    rdfs:label "FNFM Solenoid PHM Digital Voltage" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#SCDIGVLTFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Solenoid_PHM_Gate_Driver_Voltage> a ns1:Trigger ;
+    rdfs:label "FNFM Solenoid PHM Gate Driver Voltage" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#SCGDVLTFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Solenoid_PHM_HALL_Voltage> a ns1:Trigger ;
+    rdfs:label "FNFM Solenoid PHM HALL Voltage" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#SCHALLVLTFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Solenoid_PHM_LIN_Voltage_ADC> a ns1:Trigger ;
+    rdfs:label "FNFM Solenoid PHM LIN Voltage ADC" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#SCLINVLTFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Solenoid_PHM_Secondary_Status> a ns1:Trigger ;
+    rdfs:label "FNFM Solenoid PHM Secondary Status" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#SCSECSTAFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Solenoid_PHM_Split_Voltage> a ns1:Trigger ;
+    rdfs:label "FNFM Solenoid PHM Split Voltage" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#SCSPLTVLTFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Solenoid_Status> a ns1:Trigger ;
+    rdfs:label "FNFM Solenoid Status" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#SCSTAFM> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Uplink_telemetry_check> a ns1:Trigger ;
+    rdfs:label "FNFM Uplink telemetry check" ;
+    ns1:consume <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#EIP_Uplink_Alert> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#LIN_device_communication_issue_alert> a ns1:DataChannel ;
+    rdfs:label "LIN device communication issue alert" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#LP_CALIBRATION_ALERT> a ns1:DataChannel ;
+    rdfs:label "LP CALIBRATION ALERT" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#MCANGNDFM> a ns1:DataChannel ;
+    rdfs:label "MCANGNDFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#MCCORVLTFM> a ns1:DataChannel ;
+    rdfs:label "MCCORVLTFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#MCDIGVLTFM> a ns1:DataChannel ;
+    rdfs:label "MCDIGVLTFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#MCEICORVFM> a ns1:DataChannel ;
+    rdfs:label "MCEICORVFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#MCEIDIGVFM> a ns1:DataChannel ;
+    rdfs:label "MCEIDIGVFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#MCGMRVOLTFM> a ns1:DataChannel ;
+    rdfs:label "MCGMRVOLTFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#MCINVLTFM> a ns1:DataChannel ;
+    rdfs:label "MCINVLTFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#MCPRESFM> a ns1:DataChannel ;
+    rdfs:label "MCPRESFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#MCREFVLTFM> a ns1:DataChannel ;
+    rdfs:label "MCREFVLTFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#MTERRSTAFM> a ns1:DataChannel ;
+    rdfs:label "MTERRSTAFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#MTMTRSTAFM> a ns1:DataChannel ;
+    rdfs:label "MTMTRSTAFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSACTVCUFM> a ns1:DataChannel ;
+    rdfs:label "PSACTVCUFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSACTVLTFM> a ns1:DataChannel ;
+    rdfs:label "PSACTVLTFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSANAVLTFM> a ns1:DataChannel ;
+    rdfs:label "PSANAVLTFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSANVCURFM> a ns1:DataChannel ;
+    rdfs:label "PSANVCURFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSDIGGNDFM> a ns1:DataChannel ;
+    rdfs:label "PSDIGGNDFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSDIGVCUFM> a ns1:DataChannel ;
+    rdfs:label "PSDIGVCUFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSDIGVLTFM> a ns1:DataChannel ;
+    rdfs:label "PSDIGVLTFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSHVTEMPFM> a ns1:DataChannel ;
+    rdfs:label "PSHVTEMPFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSINVLTFM> a ns1:DataChannel ;
+    rdfs:label "PSINVLTFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSNANVCUFM> a ns1:DataChannel ;
+    rdfs:label "PSNANVCUFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSNANVLTFM> a ns1:DataChannel ;
+    rdfs:label "PSNANVLTFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSRCTEMPFM> a ns1:DataChannel ;
+    rdfs:label "PSRCTEMPFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSTEMPFM> a ns1:DataChannel ;
+    rdfs:label "PSTEMPFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#PSTRNTEMPFM> a ns1:DataChannel ;
+    rdfs:label "PSTRNTEMPFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#SCACTVLTFM> a ns1:DataChannel ;
+    rdfs:label "SCACTVLTFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#SCANGNDFM> a ns1:DataChannel ;
+    rdfs:label "SCANGNDFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#SCCHVLTFM> a ns1:DataChannel ;
+    rdfs:label "SCCHVLTFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#SCDIGVLTFM> a ns1:DataChannel ;
+    rdfs:label "SCDIGVLTFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#SCGDVLTFM> a ns1:DataChannel ;
+    rdfs:label "SCGDVLTFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#SCHALLVLTFM> a ns1:DataChannel ;
+    rdfs:label "SCHALLVLTFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#SCLINVLTFM> a ns1:DataChannel ;
+    rdfs:label "SCLINVLTFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#SCSECSTAFM> a ns1:DataChannel ;
+    rdfs:label "SCSECSTAFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#SCSPLTVLTFM> a ns1:DataChannel ;
+    rdfs:label "SCSPLTVLTFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#SCSTAFM> a ns1:DataChannel ;
+    rdfs:label "SCSTAFM" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#SP_CALIBRATION_ALERT> a ns1:DataChannel ;
+    rdfs:label "SP CALIBRATION ALERT" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#can't_set_the_packer> a ns1:Failure ;
+    rdfs:label "can't set the packer" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#master_controller_issue> a ns1:RootCause ;
+    rdfs:label "master controller issue" ;
+    ns1:isTriggeredBy <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Uplink_telemetry_check> ;
+    ns1:next <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#master_controller_issue_2> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#nan> a ns1:RootCause ;
+    rdfs:label "nan" .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#calibration_issue> a ns1:RootCause ;
+    rdfs:label "calibration issue" ;
+    ns1:isTriggeredBy <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Large_pump_calibration_check>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Small_pump_calibration_check> ;
+    ns1:next <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#leak_somewhere> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#gmr_sensor_issue> a ns1:RootCause ;
+    rdfs:label "gmr sensor issue" ;
+    ns1:isTriggeredBy <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_GMR_Voltage> ;
+    ns1:next <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#calibration_issue> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#leak_somewhere> a ns1:RootCause ;
+    rdfs:label "leak somewhere" ;
+    ns1:isTriggeredBy <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Output_Pressure> ;
+    ns1:next <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#nan> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#master_controller_issue_2> a ns1:RootCause ;
+    rdfs:label "master controller issue 2" ;
+    ns1:isTriggeredBy <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Master_Controller_Analog_Ground>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Master_Controller_Core_Voltage>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Master_Controller_Digital_Voltage>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Master_Controller_EIP_Core_Voltage>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Master_Controller_EIP_Digital_Voltage>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Master_Controller_Input_Voltage>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Master_Controller_Reference_Voltage> ;
+    ns1:next <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#power_supply_issue> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#master_to_motor_controller_issue_1> a ns1:RootCause ;
+    rdfs:label "master to motor controller issue 1" ;
+    ns1:isTriggeredBy <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_CAN_device_check> ;
+    ns1:next <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#motor_control_issue> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#motor_control_issue> a ns1:RootCause ;
+    rdfs:label "motor control issue" ;
+    ns1:isTriggeredBy <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Motor_Error_Status>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Motor_Status> ;
+    ns1:next <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#solenoid_controller_issue> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#power_supply_issue> a ns1:RootCause ;
+    rdfs:label "power supply issue" ;
+    ns1:isTriggeredBy <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_Actuator_Voltage>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_Actuator_Voltage_Current>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_Digital_Voltage>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_Digital_Voltage_Current>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_High_Voltage_MCM_Temperature>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_Input_Voltage>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_Negative_Analog_Voltage>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_Negative_Analog_Voltage_Current>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_Positive_Analog_Voltage>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_Positive_Analog_Voltage_Current>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_Power_Supply_Digital_Ground>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_Power_Supply_MCM_Temperature>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_Rectifier_Transistor_Temperature>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LVPS_Transformer_Temperature> ;
+    ns1:next <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#master_to_motor_controller_issue_1> .
+
+<http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#solenoid_controller_issue> a ns1:RootCause ;
+    rdfs:label "solenoid controller issue" ;
+    ns1:isTriggeredBy <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_LIN_device_check>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Solenoid_PHM_Actuator_Voltage>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Solenoid_PHM_Analog_Ground_Voltage>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Solenoid_PHM_Charge_Pump_Voltage>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Solenoid_PHM_Digital_Voltage>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Solenoid_PHM_Gate_Driver_Voltage>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Solenoid_PHM_HALL_Voltage>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Solenoid_PHM_LIN_Voltage_ADC>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Solenoid_PHM_Secondary_Status>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Solenoid_PHM_Split_Voltage>,
+        <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#FNFM_Solenoid_Status> ;
+    ns1:next <http://www.slb.com/data-graphs/Troubleshooting_ORA_FNFM_Data_graph#gmr_sensor_issue> .
+

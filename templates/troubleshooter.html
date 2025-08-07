@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-7 text-center">
+        <img src="{% static 'FNFM_UH_view_Tool_string.JPEG' %}" alt="FNFM View Tool" class="img-fluid" style="max-width: 300px;">
+        <h1 class="my-3">FNFM Troubleshooting Interface</h1>
+    </div>
+</div>
+<hr>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" id="troubleshooter-form">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="{{ form.failure_selectbox.id_for_label }}" class="form-label">On which failure do you want to start?</label>
+                <select name="failure_selectbox" id="failure_selectbox" class="form-select">
+                    {% for failure in failure_list %}
+                        <option value="{{ failure }}" {% if failure == request.POST.failure_selectbox %}selected{% endif %}>{{ failure }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="{{ form.serial_number.id_for_label }}" class="form-label">{{ form.serial_number.label }}</label>
+                {{ form.serial_number }}
+            </div>
+
+            <div class="mb-3">
+                <label for="{{ form.job_number.id_for_label }}" class="form-label">{{ form.job_number.label }}</label>
+                {{ form.job_number }}
+            </div>
+
+            <div class="mb-3">
+                <label for="{{ form.job_start.id_for_label }}" class="form-label">{{ form.job_start.label }}</label>
+                {{ form.job_start }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Analyze</button>
+        </form>
+    </div>
+
+    <div class="col-md-8">
+        {% for message in messages %}
+            <div class="alert alert-info" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% if partition_id %}
+            <h3 class="mt-4">The partition_id associated with your chosen serial number, job number and start job is {{ partition_id }}</h3>
+            <hr>
+        {% endif %}
+
+        {% if root_cause_table_html %}
+            <h3 class="mt-4">Root Cause Analysis (🔴 Only)</h3>
+            <div class="table-responsive">
+                {{ root_cause_table_html|safe }}
+            </div>
+        {% else %}
+            <p class="mt-4">No alerts detected for this failure or no data available for the selected criteria.</p>
+        {% endif %}
+
+        {% if graph_html_path %}
+            <h3 class="mt-4">Knowledge Graph Visualization</h3>
+            <iframe src="{{ graph_html_path }}" width="100%" height="1150px" frameborder="0"></iframe>
+        {% endif %}
+
+        {% if df_clean_html %}
+            <h3 class="mt-4">All Processed Triples</h3>
+            <div class="table-responsive">
+                {{ df_clean_html|safe }}
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('troubleshooter-form');
+        const serialNumberSelect = document.getElementById('id_serial_number');
+        const jobNumberSelect = document.getElementById('id_job_number');
+        const jobStartSelect = document.getElementById('id_job_start');
+
+        // Function to submit the form when a selectbox changes
+        function submitFormOnChange() {
+            form.submit();
+        }
+
+        // Attach event listeners to trigger form submission on change
+        serialNumberSelect.addEventListener('change', submitFormOnChange);
+        jobNumberSelect.addEventListener('change', submitFormOnChange);
+        jobStartSelect.addEventListener('change', submitFormOnChange);
+
+        // Re-select previously chosen values on page load (important for dynamic form updates)
+        // This is handled by Django's form rendering if the form is re-instantiated with POST data.
+        // However, if you need more granular control or client-side logic, you'd add JS here.
+    });
+</script>
+{% endblock %}
