@@ -1,0 +1,47 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+.container-fluid {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+h1, h3 {
+    color: #0056b3;
+}
+
+.form-select, .form-control {
+    border-radius: 0.5rem;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 0.5rem;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.table-responsive {
+    margin-top: 20px;
+}
+
+.table {
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    overflow: hidden; /* Ensures rounded corners apply to content */
+}
+
+.table thead {
+    background-color: #e9ecef;
+}
+
+.alert {
+    border-radius: 0.5rem;
+}

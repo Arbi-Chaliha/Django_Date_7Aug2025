@@ -1,0 +1,164 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 1100px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#FFCC99", "id": "flow rate is null", "label": "flow rate is null", "shape": "dot", "title": "type:Failure, name:flow rate is null"}, {"color": "#FFCC99", "id": "can\u0027t set the packer", "label": "can\u0027t set the packer", "shape": "dot", "title": "type:Failure, name:can\u0027t set the packer"}, {"color": "#C5A3FF", "id": "master controller issue", "label": "master controller issue", "shape": "dot", "title": "type:Root Cause, name:master controller issue"}, {"color": "#C5A3FF", "id": "calibration issue", "label": "calibration issue", "shape": "dot", "title": "type:Root Cause, name:calibration issue"}, {"color": "#C5A3FF", "id": "gmr sensor issue", "label": "gmr sensor issue", "shape": "dot", "title": "type:Root Cause, name:gmr sensor issue"}, {"color": "#C5A3FF", "id": "leak somewhere", "label": "leak somewhere", "shape": "dot", "title": "type:Root Cause, name:leak somewhere"}, {"color": "#C5A3FF", "id": "master controller issue 2", "label": "master controller issue 2", "shape": "dot", "title": "type:Root Cause, name:master controller issue 2"}, {"color": "#C5A3FF", "id": "master to motor controller issue 1", "label": "master to motor controller issue 1", "shape": "dot", "title": "type:Root Cause, name:master to motor controller issue 1"}, {"color": "#C5A3FF", "id": "motor control issue", "label": "motor control issue", "shape": "dot", "title": "type:Root Cause, name:motor control issue"}, {"color": "#C5A3FF", "id": "power supply issue", "label": "power supply issue", "shape": "dot", "title": "type:Root Cause, name:power supply issue"}, {"color": "#C5A3FF", "id": "solenoid controller issue", "label": "solenoid controller issue", "shape": "dot", "title": "type:Root Cause, name:solenoid controller issue"}, {"color": "#D2B48C", "id": "FNFM Uplink telemetry check", "label": "FNFM Uplink telemetry check", "shape": "dot", "title": "type:Trigger, name:FNFM Uplink telemetry check, value:nan"}, {"color": "green", "id": "EIP Uplink Alert", "label": "EIP Uplink Alert", "shape": "dot", "title": "type:data channel, name:EIP Uplink Alert"}, {"color": "#D2B48C", "id": "FNFM Master Controller Analog Ground", "label": "FNFM Master Controller Analog Ground", "shape": "dot", "title": "type:Trigger, name:FNFM Master Controller Analog Ground, value:nan"}, {"color": "#D2B48C", "id": "FNFM Master Controller Core Voltage", "label": "FNFM Master Controller Core Voltage", "shape": "dot", "title": "type:Trigger, name:FNFM Master Controller Core Voltage, value:nan"}, {"color": "#D2B48C", "id": "FNFM Master Controller Digital Voltage", "label": "FNFM Master Controller Digital Voltage", "shape": "dot", "title": "type:Trigger, name:FNFM Master Controller Digital Voltage, value:nan"}, {"color": "#D2B48C", "id": "FNFM Master Controller EIP Core Voltage", "label": "FNFM Master Controller EIP Core Voltage", "shape": "dot", "title": "type:Trigger, name:FNFM Master Controller EIP Core Voltage, value:nan"}, {"color": "#D2B48C", "id": "FNFM Master Controller EIP Digital Voltage", "label": "FNFM Master Controller EIP Digital Voltage", "shape": "dot", "title": "type:Trigger, name:FNFM Master Controller EIP Digital Voltage, value:nan"}, {"color": "#D2B48C", "id": "FNFM Master Controller Input Voltage", "label": "FNFM Master Controller Input Voltage", "shape": "dot", "title": "type:Trigger, name:FNFM Master Controller Input Voltage, value:nan"}, {"color": "#D2B48C", "id": "FNFM Master Controller Reference Voltage", "label": "FNFM Master Controller Reference Voltage", "shape": "dot", "title": "type:Trigger, name:FNFM Master Controller Reference Voltage, value:nan"}, {"color": "green", "id": "MCCORVLTFM", "label": "MCCORVLTFM", "shape": "dot", "title": "type:data channel, name:MCCORVLTFM"}, {"color": "green", "id": "MCDIGVLTFM", "label": "MCDIGVLTFM", "shape": "dot", "title": "type:data channel, name:MCDIGVLTFM"}, {"color": "green", "id": "MCEICORVFM", "label": "MCEICORVFM", "shape": "dot", "title": "type:data channel, name:MCEICORVFM"}, {"color": "green", "id": "MCEIDIGVFM", "label": "MCEIDIGVFM", "shape": "dot", "title": "type:data channel, name:MCEIDIGVFM"}, {"color": "green", "id": "MCINVLTFM", "label": "MCINVLTFM", "shape": "dot", "title": "type:data channel, name:MCINVLTFM"}, {"color": "green", "id": "MCREFVLTFM", "label": "MCREFVLTFM", "shape": "dot", "title": "type:data channel, name:MCREFVLTFM"}, {"color": "#D2B48C", "id": "FNFM LVPS Actuator Voltage", "label": "FNFM LVPS Actuator Voltage", "shape": "dot", "title": "type:Trigger, name:FNFM LVPS Actuator Voltage, value:nan"}, {"color": "#D2B48C", "id": "FNFM LVPS Actuator Voltage Current", "label": "FNFM LVPS Actuator Voltage Current", "shape": "dot", "title": "type:Trigger, name:FNFM LVPS Actuator Voltage Current, value:nan"}, {"color": "#D2B48C", "id": "FNFM LVPS Digital Voltage", "label": "FNFM LVPS Digital Voltage", "shape": "dot", "title": "type:Trigger, name:FNFM LVPS Digital Voltage, value:nan"}, {"color": "#D2B48C", "id": "FNFM LVPS Digital Voltage Current", "label": "FNFM LVPS Digital Voltage Current", "shape": "dot", "title": "type:Trigger, name:FNFM LVPS Digital Voltage Current, value:nan"}, {"color": "#D2B48C", "id": "FNFM LVPS High Voltage MCM Temperature", "label": "FNFM LVPS High Voltage MCM Temperature", "shape": "dot", "title": "type:Trigger, name:FNFM LVPS High Voltage MCM Temperature, value:nan"}, {"color": "#D2B48C", "id": "FNFM LVPS Input Voltage", "label": "FNFM LVPS Input Voltage", "shape": "dot", "title": "type:Trigger, name:FNFM LVPS Input Voltage, value:nan"}, {"color": "#D2B48C", "id": "FNFM LVPS Negative Analog Voltage", "label": "FNFM LVPS Negative Analog Voltage", "shape": "dot", "title": "type:Trigger, name:FNFM LVPS Negative Analog Voltage, value:nan"}, {"color": "#D2B48C", "id": "FNFM LVPS Negative Analog Voltage Current", "label": "FNFM LVPS Negative Analog Voltage Current", "shape": "dot", "title": "type:Trigger, name:FNFM LVPS Negative Analog Voltage Current, value:nan"}, {"color": "#D2B48C", "id": "FNFM LVPS Positive Analog Voltage", "label": "FNFM LVPS Positive Analog Voltage", "shape": "dot", "title": "type:Trigger, name:FNFM LVPS Positive Analog Voltage, value:nan"}, {"color": "#D2B48C", "id": "FNFM LVPS Positive Analog Voltage Current", "label": "FNFM LVPS Positive Analog Voltage Current", "shape": "dot", "title": "type:Trigger, name:FNFM LVPS Positive Analog Voltage Current, value:nan"}, {"color": "#D2B48C", "id": "FNFM LVPS Power Supply Digital Ground", "label": "FNFM LVPS Power Supply Digital Ground", "shape": "dot", "title": "type:Trigger, name:FNFM LVPS Power Supply Digital Ground, value:nan"}, {"color": "#D2B48C", "id": "FNFM LVPS Power Supply MCM Temperature", "label": "FNFM LVPS Power Supply MCM Temperature", "shape": "dot", "title": "type:Trigger, name:FNFM LVPS Power Supply MCM Temperature, value:nan"}, {"color": "#D2B48C", "id": "FNFM LVPS Rectifier Transistor Temperature", "label": "FNFM LVPS Rectifier Transistor Temperature", "shape": "dot", "title": "type:Trigger, name:FNFM LVPS Rectifier Transistor Temperature, value:nan"}, {"color": "#D2B48C", "id": "FNFM LVPS Transformer Temperature", "label": "FNFM LVPS Transformer Temperature", "shape": "dot", "title": "type:Trigger, name:FNFM LVPS Transformer Temperature, value:nan"}, {"color": "green", "id": "PSDIGVLTFM", "label": "PSDIGVLTFM", "shape": "dot", "title": "type:data channel, name:PSDIGVLTFM"}, {"color": "red", "id": "PSNANVLTFM", "label": "PSNANVLTFM", "shape": "dot", "title": "type:data channel, name:PSNANVLTFM"}, {"color": "red", "id": "PSANAVLTFM", "label": "PSANAVLTFM", "shape": "dot", "title": "type:data channel, name:PSANAVLTFM"}, {"color": "#D2B48C", "id": "FNFM CAN device check", "label": "FNFM CAN device check", "shape": "dot", "title": "type:Trigger, name:FNFM CAN device check, value:nan"}, {"color": "green", "id": "CAN communication degraded alert", "label": "CAN communication degraded alert", "shape": "dot", "title": "type:data channel, name:CAN communication degraded alert"}, {"color": "#D2B48C", "id": "FNFM Motor Error Status", "label": "FNFM Motor Error Status", "shape": "dot", "title": "type:Trigger, name:FNFM Motor Error Status, value:nan"}, {"color": "#D2B48C", "id": "FNFM Motor Status", "label": "FNFM Motor Status", "shape": "dot", "title": "type:Trigger, name:FNFM Motor Status, value:nan"}, {"color": "red", "id": "MTERRSTAFM", "label": "MTERRSTAFM", "shape": "dot", "title": "type:data channel, name:MTERRSTAFM"}, {"color": "#D2B48C", "id": "FNFM LIN device check", "label": "FNFM LIN device check", "shape": "dot", "title": "type:Trigger, name:FNFM LIN device check, value:nan"}, {"color": "#D2B48C", "id": "FNFM Solenoid PHM Actuator Voltage", "label": "FNFM Solenoid PHM Actuator Voltage", "shape": "dot", "title": "type:Trigger, name:FNFM Solenoid PHM Actuator Voltage, value:nan"}, {"color": "#D2B48C", "id": "FNFM Solenoid PHM Analog Ground Voltage", "label": "FNFM Solenoid PHM Analog Ground Voltage", "shape": "dot", "title": "type:Trigger, name:FNFM Solenoid PHM Analog Ground Voltage, value:nan"}, {"color": "#D2B48C", "id": "FNFM Solenoid PHM Charge Pump Voltage", "label": "FNFM Solenoid PHM Charge Pump Voltage", "shape": "dot", "title": "type:Trigger, name:FNFM Solenoid PHM Charge Pump Voltage, value:nan"}, {"color": "#D2B48C", "id": "FNFM Solenoid PHM Digital Voltage", "label": "FNFM Solenoid PHM Digital Voltage", "shape": "dot", "title": "type:Trigger, name:FNFM Solenoid PHM Digital Voltage, value:nan"}, {"color": "#D2B48C", "id": "FNFM Solenoid PHM Gate Driver Voltage", "label": "FNFM Solenoid PHM Gate Driver Voltage", "shape": "dot", "title": "type:Trigger, name:FNFM Solenoid PHM Gate Driver Voltage, value:nan"}, {"color": "#D2B48C", "id": "FNFM Solenoid PHM HALL Voltage", "label": "FNFM Solenoid PHM HALL Voltage", "shape": "dot", "title": "type:Trigger, name:FNFM Solenoid PHM HALL Voltage, value:nan"}, {"color": "#D2B48C", "id": "FNFM Solenoid PHM LIN Voltage ADC", "label": "FNFM Solenoid PHM LIN Voltage ADC", "shape": "dot", "title": "type:Trigger, name:FNFM Solenoid PHM LIN Voltage ADC, value:nan"}, {"color": "#D2B48C", "id": "FNFM Solenoid PHM Secondary Status", "label": "FNFM Solenoid PHM Secondary Status", "shape": "dot", "title": "type:Trigger, name:FNFM Solenoid PHM Secondary Status, value:nan"}, {"color": "#D2B48C", "id": "FNFM Solenoid PHM Split Voltage", "label": "FNFM Solenoid PHM Split Voltage", "shape": "dot", "title": "type:Trigger, name:FNFM Solenoid PHM Split Voltage, value:nan"}, {"color": "#D2B48C", "id": "FNFM Solenoid Status", "label": "FNFM Solenoid Status", "shape": "dot", "title": "type:Trigger, name:FNFM Solenoid Status, value:nan"}, {"color": "green", "id": "LIN device communication issue alert", "label": "LIN device communication issue alert", "shape": "dot", "title": "type:data channel, name:LIN device communication issue alert"}, {"color": "green", "id": "SCDIGVLTFM", "label": "SCDIGVLTFM", "shape": "dot", "title": "type:data channel, name:SCDIGVLTFM"}, {"color": "green", "id": "SCHALLVLTFM", "label": "SCHALLVLTFM", "shape": "dot", "title": "type:data channel, name:SCHALLVLTFM"}, {"color": "green", "id": "SCLINVLTFM", "label": "SCLINVLTFM", "shape": "dot", "title": "type:data channel, name:SCLINVLTFM"}, {"color": "#D2B48C", "id": "FNFM GMR Voltage", "label": "FNFM GMR Voltage", "shape": "dot", "title": "type:Trigger, name:FNFM GMR Voltage, value:nan"}, {"color": "#D2B48C", "id": "FNFM Large pump calibration check", "label": "FNFM Large pump calibration check", "shape": "dot", "title": "type:Trigger, name:FNFM Large pump calibration check, value:nan"}, {"color": "#D2B48C", "id": "FNFM Small pump calibration check", "label": "FNFM Small pump calibration check", "shape": "dot", "title": "type:Trigger, name:FNFM Small pump calibration check, value:nan"}, {"color": "red", "id": "LP CALIBRATION ALERT", "label": "LP CALIBRATION ALERT", "shape": "dot", "title": "type:data channel, name:LP CALIBRATION ALERT"}, {"color": "green", "id": "SP CALIBRATION ALERT", "label": "SP CALIBRATION ALERT", "shape": "dot", "title": "type:data channel, name:SP CALIBRATION ALERT"}, {"color": "#D2B48C", "id": "FNFM Output Pressure", "label": "FNFM Output Pressure", "shape": "dot", "title": "type:Trigger, name:FNFM Output Pressure, value:nan"}, {"color": "#C5A3FF", "id": "nan", "label": "nan", "shape": "dot", "title": "type:Root Cause, name:nan"}]);
+                  edges = new vis.DataSet([{"arrows": "to", "color": "#A7C7E7", "from": "flow rate is null", "title": "name:cause", "to": "can\u0027t set the packer"}, {"arrows": "to", "color": "#A7C7E7", "from": "flow rate is null", "title": "name:hasRootCause", "to": "master controller issue"}, {"arrows": "to", "color": "#A7C7E7", "from": "flow rate is null", "title": "name:hasRootCause", "to": "calibration issue"}, {"arrows": "to", "color": "#A7C7E7", "from": "flow rate is null", "title": "name:hasRootCause", "to": "gmr sensor issue"}, {"arrows": "to", "color": "#A7C7E7", "from": "flow rate is null", "title": "name:hasRootCause", "to": "leak somewhere"}, {"arrows": "to", "color": "#A7C7E7", "from": "flow rate is null", "title": "name:hasRootCause", "to": "master controller issue 2"}, {"arrows": "to", "color": "#A7C7E7", "from": "flow rate is null", "title": "name:hasRootCause", "to": "master to motor controller issue 1"}, {"arrows": "to", "color": "#A7C7E7", "from": "flow rate is null", "title": "name:hasRootCause", "to": "motor control issue"}, {"arrows": "to", "color": "#A7C7E7", "from": "flow rate is null", "title": "name:hasRootCause", "to": "power supply issue"}, {"arrows": "to", "color": "#A7C7E7", "from": "flow rate is null", "title": "name:hasRootCause", "to": "solenoid controller issue"}, {"arrows": "to", "color": "#A7C7E7", "from": "master controller issue", "title": "name:isTriggeredBy", "to": "FNFM Uplink telemetry check"}, {"arrows": "to", "color": "#A7C7E7", "from": "master controller issue", "title": "name:next", "to": "master controller issue 2"}, {"arrows": "to", "color": "green", "from": "FNFM Uplink telemetry check", "title": "name:consume", "to": "EIP Uplink Alert"}, {"arrows": "to", "color": "#A7C7E7", "from": "master controller issue 2", "title": "name:isTriggeredBy", "to": "FNFM Master Controller Analog Ground"}, {"arrows": "to", "color": "#A7C7E7", "from": "master controller issue 2", "title": "name:isTriggeredBy", "to": "FNFM Master Controller Core Voltage"}, {"arrows": "to", "color": "#A7C7E7", "from": "master controller issue 2", "title": "name:isTriggeredBy", "to": "FNFM Master Controller Digital Voltage"}, {"arrows": "to", "color": "#A7C7E7", "from": "master controller issue 2", "title": "name:isTriggeredBy", "to": "FNFM Master Controller EIP Core Voltage"}, {"arrows": "to", "color": "#A7C7E7", "from": "master controller issue 2", "title": "name:isTriggeredBy", "to": "FNFM Master Controller EIP Digital Voltage"}, {"arrows": "to", "color": "#A7C7E7", "from": "master controller issue 2", "title": "name:isTriggeredBy", "to": "FNFM Master Controller Input Voltage"}, {"arrows": "to", "color": "#A7C7E7", "from": "master controller issue 2", "title": "name:isTriggeredBy", "to": "FNFM Master Controller Reference Voltage"}, {"arrows": "to", "color": "#A7C7E7", "from": "master controller issue 2", "title": "name:next", "to": "power supply issue"}, {"arrows": "to", "color": "green", "from": "FNFM Master Controller Core Voltage", "title": "name:consume", "to": "MCCORVLTFM"}, {"arrows": "to", "color": "green", "from": "FNFM Master Controller Digital Voltage", "title": "name:consume", "to": "MCDIGVLTFM"}, {"arrows": "to", "color": "green", "from": "FNFM Master Controller EIP Core Voltage", "title": "name:consume", "to": "MCEICORVFM"}, {"arrows": "to", "color": "green", "from": "FNFM Master Controller EIP Digital Voltage", "title": "name:consume", "to": "MCEIDIGVFM"}, {"arrows": "to", "color": "green", "from": "FNFM Master Controller Input Voltage", "title": "name:consume", "to": "MCINVLTFM"}, {"arrows": "to", "color": "green", "from": "FNFM Master Controller Reference Voltage", "title": "name:consume", "to": "MCREFVLTFM"}, {"arrows": "to", "color": "#A7C7E7", "from": "power supply issue", "title": "name:isTriggeredBy", "to": "FNFM LVPS Actuator Voltage"}, {"arrows": "to", "color": "#A7C7E7", "from": "power supply issue", "title": "name:isTriggeredBy", "to": "FNFM LVPS Actuator Voltage Current"}, {"arrows": "to", "color": "#A7C7E7", "from": "power supply issue", "title": "name:isTriggeredBy", "to": "FNFM LVPS Digital Voltage"}, {"arrows": "to", "color": "#A7C7E7", "from": "power supply issue", "title": "name:isTriggeredBy", "to": "FNFM LVPS Digital Voltage Current"}, {"arrows": "to", "color": "#A7C7E7", "from": "power supply issue", "title": "name:isTriggeredBy", "to": "FNFM LVPS High Voltage MCM Temperature"}, {"arrows": "to", "color": "#A7C7E7", "from": "power supply issue", "title": "name:isTriggeredBy", "to": "FNFM LVPS Input Voltage"}, {"arrows": "to", "color": "#A7C7E7", "from": "power supply issue", "title": "name:isTriggeredBy", "to": "FNFM LVPS Negative Analog Voltage"}, {"arrows": "to", "color": "#A7C7E7", "from": "power supply issue", "title": "name:isTriggeredBy", "to": "FNFM LVPS Negative Analog Voltage Current"}, {"arrows": "to", "color": "#A7C7E7", "from": "power supply issue", "title": "name:isTriggeredBy", "to": "FNFM LVPS Positive Analog Voltage"}, {"arrows": "to", "color": "#A7C7E7", "from": "power supply issue", "title": "name:isTriggeredBy", "to": "FNFM LVPS Positive Analog Voltage Current"}, {"arrows": "to", "color": "#A7C7E7", "from": "power supply issue", "title": "name:isTriggeredBy", "to": "FNFM LVPS Power Supply Digital Ground"}, {"arrows": "to", "color": "#A7C7E7", "from": "power supply issue", "title": "name:isTriggeredBy", "to": "FNFM LVPS Power Supply MCM Temperature"}, {"arrows": "to", "color": "#A7C7E7", "from": "power supply issue", "title": "name:isTriggeredBy", "to": "FNFM LVPS Rectifier Transistor Temperature"}, {"arrows": "to", "color": "#A7C7E7", "from": "power supply issue", "title": "name:isTriggeredBy", "to": "FNFM LVPS Transformer Temperature"}, {"arrows": "to", "color": "#A7C7E7", "from": "power supply issue", "title": "name:next", "to": "master to motor controller issue 1"}, {"arrows": "to", "color": "green", "from": "FNFM LVPS Digital Voltage", "title": "name:consume", "to": "PSDIGVLTFM"}, {"arrows": "to", "color": "red", "from": "FNFM LVPS Negative Analog Voltage", "title": "name:consume", "to": "PSNANVLTFM"}, {"arrows": "to", "color": "red", "from": "FNFM LVPS Positive Analog Voltage", "title": "name:consume", "to": "PSANAVLTFM"}, {"arrows": "to", "color": "#A7C7E7", "from": "master to motor controller issue 1", "title": "name:isTriggeredBy", "to": "FNFM CAN device check"}, {"arrows": "to", "color": "#A7C7E7", "from": "master to motor controller issue 1", "title": "name:next", "to": "motor control issue"}, {"arrows": "to", "color": "green", "from": "FNFM CAN device check", "title": "name:consume", "to": "CAN communication degraded alert"}, {"arrows": "to", "color": "#A7C7E7", "from": "motor control issue", "title": "name:isTriggeredBy", "to": "FNFM Motor Error Status"}, {"arrows": "to", "color": "#A7C7E7", "from": "motor control issue", "title": "name:isTriggeredBy", "to": "FNFM Motor Status"}, {"arrows": "to", "color": "#A7C7E7", "from": "motor control issue", "title": "name:next", "to": "solenoid controller issue"}, {"arrows": "to", "color": "red", "from": "FNFM Motor Error Status", "title": "name:consume", "to": "MTERRSTAFM"}, {"arrows": "to", "color": "#A7C7E7", "from": "solenoid controller issue", "title": "name:isTriggeredBy", "to": "FNFM LIN device check"}, {"arrows": "to", "color": "#A7C7E7", "from": "solenoid controller issue", "title": "name:isTriggeredBy", "to": "FNFM Solenoid PHM Actuator Voltage"}, {"arrows": "to", "color": "#A7C7E7", "from": "solenoid controller issue", "title": "name:isTriggeredBy", "to": "FNFM Solenoid PHM Analog Ground Voltage"}, {"arrows": "to", "color": "#A7C7E7", "from": "solenoid controller issue", "title": "name:isTriggeredBy", "to": "FNFM Solenoid PHM Charge Pump Voltage"}, {"arrows": "to", "color": "#A7C7E7", "from": "solenoid controller issue", "title": "name:isTriggeredBy", "to": "FNFM Solenoid PHM Digital Voltage"}, {"arrows": "to", "color": "#A7C7E7", "from": "solenoid controller issue", "title": "name:isTriggeredBy", "to": "FNFM Solenoid PHM Gate Driver Voltage"}, {"arrows": "to", "color": "#A7C7E7", "from": "solenoid controller issue", "title": "name:isTriggeredBy", "to": "FNFM Solenoid PHM HALL Voltage"}, {"arrows": "to", "color": "#A7C7E7", "from": "solenoid controller issue", "title": "name:isTriggeredBy", "to": "FNFM Solenoid PHM LIN Voltage ADC"}, {"arrows": "to", "color": "#A7C7E7", "from": "solenoid controller issue", "title": "name:isTriggeredBy", "to": "FNFM Solenoid PHM Secondary Status"}, {"arrows": "to", "color": "#A7C7E7", "from": "solenoid controller issue", "title": "name:isTriggeredBy", "to": "FNFM Solenoid PHM Split Voltage"}, {"arrows": "to", "color": "#A7C7E7", "from": "solenoid controller issue", "title": "name:isTriggeredBy", "to": "FNFM Solenoid Status"}, {"arrows": "to", "color": "#A7C7E7", "from": "solenoid controller issue", "title": "name:next", "to": "gmr sensor issue"}, {"arrows": "to", "color": "green", "from": "FNFM LIN device check", "title": "name:consume", "to": "LIN device communication issue alert"}, {"arrows": "to", "color": "green", "from": "FNFM Solenoid PHM Digital Voltage", "title": "name:consume", "to": "SCDIGVLTFM"}, {"arrows": "to", "color": "green", "from": "FNFM Solenoid PHM HALL Voltage", "title": "name:consume", "to": "SCHALLVLTFM"}, {"arrows": "to", "color": "green", "from": "FNFM Solenoid PHM LIN Voltage ADC", "title": "name:consume", "to": "SCLINVLTFM"}, {"arrows": "to", "color": "#A7C7E7", "from": "gmr sensor issue", "title": "name:isTriggeredBy", "to": "FNFM GMR Voltage"}, {"arrows": "to", "color": "#A7C7E7", "from": "gmr sensor issue", "title": "name:next", "to": "calibration issue"}, {"arrows": "to", "color": "#A7C7E7", "from": "calibration issue", "title": "name:isTriggeredBy", "to": "FNFM Large pump calibration check"}, {"arrows": "to", "color": "#A7C7E7", "from": "calibration issue", "title": "name:isTriggeredBy", "to": "FNFM Small pump calibration check"}, {"arrows": "to", "color": "#A7C7E7", "from": "calibration issue", "title": "name:next", "to": "leak somewhere"}, {"arrows": "to", "color": "red", "from": "FNFM Large pump calibration check", "title": "name:consume", "to": "LP CALIBRATION ALERT"}, {"arrows": "to", "color": "green", "from": "FNFM Small pump calibration check", "title": "name:consume", "to": "SP CALIBRATION ALERT"}, {"arrows": "to", "color": "#A7C7E7", "from": "leak somewhere", "title": "name:isTriggeredBy", "to": "FNFM Output Pressure"}, {"arrows": "to", "color": "#A7C7E7", "from": "leak somewhere", "title": "name:next", "to": "nan"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "forceAtlas2Based": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.01,
+            "damping": 0.4,
+            "gravitationalConstant": -50,
+            "springConstant": 0.05,
+            "springLength": 200
+        },
+        "solver": "forceAtlas2Based",
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

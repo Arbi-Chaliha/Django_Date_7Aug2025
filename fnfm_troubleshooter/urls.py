@@ -13,4 +13,5 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     # This is crucial for pyvis graph HTML files to be accessible
-    urlpatterns += static('/static/graphs/', document_root=os.path.join(settings.BASE_DIR, 'static', 'graphs'))
+    #urlpatterns += static('/static/graphs/', document_root=os.path.join(settings.BASE_DIR, 'static', 'graphs'))
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])

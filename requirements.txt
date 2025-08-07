@@ -1,0 +1,17 @@
+pandas
+rdflib
+tqdm
+streamlit
+graphviz
+requests
+teradatasql
+numpy
+tempfile
+shutil
+os
+time
+datetime
+sqlalchemy
+pyvis
+duckdb
+python-dotenv
