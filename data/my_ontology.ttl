@@ -1,0 +1,161 @@
+# baseURI: urn:x-evn-master:troubleshooting_ora_fnfm_ontology_
+
+@base          <urn:x-evn-master:troubleshooting_ora_fnfm_ontology_> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix troubleshooting_ora_fnfm_ontology_: <http://www.slb.com/ontologies/Troubleshooting_ORA_FNFM_Ontology_#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+
+<urn:x-evn-master:troubleshooting_ora_fnfm_ontology_>
+        owl:imports          <http://datashapes.org/graphql> ;
+        rdfs:label           "Troubleshooting ORA FNFM Ontology " ;
+        rdf:type             owl:Ontology ;
+        <http://topbraid.org/swa#defaultNamespace>  "http://www.slb.com/ontologies/Troubleshooting_ORA_FNFM_Ontology_#" ;
+        metadata:status      metadata:UnderDevelopmentStatus ;
+        graphql:publicClass  troubleshooting_ora_fnfm_ontology_:Asset ;
+        graphql:publicClass  troubleshooting_ora_fnfm_ontology_:Failure ;
+        graphql:publicClass  troubleshooting_ora_fnfm_ontology_:RootCause ;
+        graphql:publicClass  troubleshooting_ora_fnfm_ontology_:Trigger ;
+        graphql:publicClass  troubleshooting_ora_fnfm_ontology_:DataChannel ;
+        graphql:publicClass  troubleshooting_ora_fnfm_ontology_:ChannelFamily .
+
+troubleshooting_ora_fnfm_ontology_:Asset
+        rdfs:label       "Asset" ;
+        rdf:type         sh:NodeShape ;
+        rdf:type         owl:Class ;
+        rdfs:subClassOf  owl:Thing ;
+        sh:property      troubleshooting_ora_fnfm_ontology_:Asset-hasFailure ;
+        sh:property      troubleshooting_ora_fnfm_ontology_:Asset-label .
+
+troubleshooting_ora_fnfm_ontology_:Failure
+        rdfs:label       "Failure" ;
+        rdf:type         sh:NodeShape ;
+        rdf:type         owl:Class ;
+        rdfs:subClassOf  owl:Thing ;
+        sh:property      troubleshooting_ora_fnfm_ontology_:Failure-hasRootCause ;
+        sh:property      troubleshooting_ora_fnfm_ontology_:Failure-cause ;
+        sh:property      troubleshooting_ora_fnfm_ontology_:Failure-label .
+
+troubleshooting_ora_fnfm_ontology_:RootCause
+        rdfs:label       "Root Cause" ;
+        rdf:type         sh:NodeShape ;
+        rdf:type         owl:Class ;
+        rdfs:subClassOf  owl:Thing ;
+        sh:property      troubleshooting_ora_fnfm_ontology_:RootCause-isTriggeredBy ;
+        sh:property      troubleshooting_ora_fnfm_ontology_:RootCause-next ;
+        sh:property      troubleshooting_ora_fnfm_ontology_:RootCause-label .
+
+troubleshooting_ora_fnfm_ontology_:Trigger
+        rdfs:label       "Trigger" ;
+        rdf:type         sh:NodeShape ;
+        rdf:type         owl:Class ;
+        rdfs:subClassOf  owl:Thing ;
+        sh:property      troubleshooting_ora_fnfm_ontology_:Trigger-consume ;
+        sh:property      troubleshooting_ora_fnfm_ontology_:Trigger-label .
+
+troubleshooting_ora_fnfm_ontology_:DataChannel
+        rdfs:label       "Data Channel" ;
+        rdf:type         sh:NodeShape ;
+        rdf:type         owl:Class ;
+        rdfs:subClassOf  owl:Thing ;
+        sh:property      troubleshooting_ora_fnfm_ontology_:DataChannel-belongsTo ;
+        sh:property      troubleshooting_ora_fnfm_ontology_:DataChannel-label .
+
+troubleshooting_ora_fnfm_ontology_:ChannelFamily
+        rdfs:label       "Channel Family" ;
+        rdf:type         sh:NodeShape ;
+        rdf:type         owl:Class ;
+        rdfs:subClassOf  owl:Thing ;
+        sh:property      troubleshooting_ora_fnfm_ontology_:ChannelFamily-label .
+
+troubleshooting_ora_fnfm_ontology_:Asset-hasFailure
+        rdf:type     sh:PropertyShape ;
+        sh:class     troubleshooting_ora_fnfm_ontology_:Failure ;
+        sh:path      troubleshooting_ora_fnfm_ontology_:hasFailure ;
+        sh:name      "has failure" ;
+        sh:nodeKind  sh:IRI .
+
+troubleshooting_ora_fnfm_ontology_:Failure-hasRootCause
+        rdf:type     sh:PropertyShape ;
+        sh:class     troubleshooting_ora_fnfm_ontology_:RootCause ;
+        sh:path      troubleshooting_ora_fnfm_ontology_:hasRootCause ;
+        sh:name      "has root cause" ;
+        sh:nodeKind  sh:IRI .
+
+troubleshooting_ora_fnfm_ontology_:RootCause-isTriggeredBy
+        rdf:type     sh:PropertyShape ;
+        sh:class     troubleshooting_ora_fnfm_ontology_:Trigger ;
+        sh:path      troubleshooting_ora_fnfm_ontology_:isTriggeredBy ;
+        sh:name      "is triggered by" ;
+        sh:nodeKind  sh:IRI .
+
+troubleshooting_ora_fnfm_ontology_:Trigger-consume
+        rdf:type     sh:PropertyShape ;
+        sh:class     troubleshooting_ora_fnfm_ontology_:DataChannel ;
+        sh:path      troubleshooting_ora_fnfm_ontology_:consume ;
+        sh:name      "consume" ;
+        sh:nodeKind  sh:IRI .
+
+troubleshooting_ora_fnfm_ontology_:DataChannel-belongsTo
+        rdf:type     sh:PropertyShape ;
+        sh:class     troubleshooting_ora_fnfm_ontology_:ChannelFamily ;
+        sh:path      troubleshooting_ora_fnfm_ontology_:belongsTo ;
+        sh:name      "belongs to " ;
+        sh:nodeKind  sh:IRI .
+
+troubleshooting_ora_fnfm_ontology_:Failure-cause
+        rdf:type     sh:PropertyShape ;
+        sh:class     troubleshooting_ora_fnfm_ontology_:Failure ;
+        sh:path      troubleshooting_ora_fnfm_ontology_:cause ;
+        sh:name      "cause" ;
+        sh:nodeKind  sh:IRI .
+
+troubleshooting_ora_fnfm_ontology_:RootCause-next
+        rdf:type     sh:PropertyShape ;
+        sh:class     troubleshooting_ora_fnfm_ontology_:RootCause ;
+        sh:path      troubleshooting_ora_fnfm_ontology_:next ;
+        sh:name      "next" ;
+        sh:nodeKind  sh:IRI .
+
+troubleshooting_ora_fnfm_ontology_:Trigger-label
+        rdf:type     sh:PropertyShape ;
+        sh:path      rdfs:label ;
+        sh:name      "label" ;
+        sh:datatype  xsd:string .
+
+troubleshooting_ora_fnfm_ontology_:Asset-label
+        rdf:type     sh:PropertyShape ;
+        sh:path      rdfs:label ;
+        sh:name      "label" ;
+        sh:datatype  xsd:string .
+
+troubleshooting_ora_fnfm_ontology_:ChannelFamily-label
+        rdf:type     sh:PropertyShape ;
+        sh:path      rdfs:label ;
+        sh:name      "label" ;
+        sh:nodeKind  sh:Literal ;
+        sh:datatype  xsd:string .
+
+troubleshooting_ora_fnfm_ontology_:DataChannel-label
+        rdf:type     sh:PropertyShape ;
+        sh:path      rdfs:label ;
+        sh:name      "label" ;
+        sh:nodeKind  sh:Literal ;
+        sh:datatype  xsd:string .
+
+troubleshooting_ora_fnfm_ontology_:Failure-label
+        rdf:type     sh:PropertyShape ;
+        sh:path      rdfs:label ;
+        sh:name      "label" ;
+        sh:datatype  xsd:string .
+
+troubleshooting_ora_fnfm_ontology_:RootCause-label
+        rdf:type     sh:PropertyShape ;
+        sh:path      rdfs:label ;
+        sh:name      "label" ;
+        sh:datatype  xsd:string .
